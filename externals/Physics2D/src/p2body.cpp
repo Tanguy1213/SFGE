@@ -22,6 +22,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include <p2body.h>
+#include <p2World.h>
+
+p2Body::p2Body(p2BodyDef *p2BodyDef)
+{
+	position = p2BodyDef->position;
+	
+	/*switch (p2BodyType)
+	{
+	case p2BodyType::STATIC:
+		p2BodyDef.type = p2BodyType::STATIC;
+		break;
+	case p2BodyType::KINEMATIC:
+		p2BodyDef.type = p2BodyType::KINEMATIC;
+		break;
+	case p2BodyType::DYNAMIC:
+		p2BodyDef.type = p2BodyType::DYNAMIC;
+		break;
+	}*/
+	mass = p2BodyDef->mass;
+	type = p2BodyDef->type;
+	linearVelocity = p2BodyDef->linearVelocity;
+}
 
 p2Vec2 p2Body::GetLinearVelocity()
 {
@@ -42,7 +64,34 @@ p2Vec2 p2Body::GetPosition()
 	return position;
 }
 
+float p2Body::GetMass()
+{
+	return mass;
+}
+
+void p2Body::SetMass(float mass)
+{
+	this->mass = mass;
+}
+
+void p2Body::SetPosition(p2Vec2 p)
+{
+	this->position = position + p;
+}
+
+void p2Body::AddForce(p2Vec2 f)
+{
+	this-> force += f;
+}
+
+void p2Body::addBody(p2Body * body)
+{
+	bodies.push_front(*body);
+}
+
+
 p2Collider * p2Body::CreateCollider(p2ColliderDef * colliderDef)
 {
-	return nullptr;
+	collider = new p2Collider(*colliderDef);
+	return collider;
 }

@@ -20,6 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 */
 
 #ifndef SFGE_P2WORLD_H
@@ -28,6 +29,7 @@ SOFTWARE.
 #include <p2vector.h>
 #include <p2body.h>
 #include <p2contact.h>
+#include <list>
 
 /**
 * \brief Representation of the physical world in meter
@@ -50,6 +52,7 @@ public:
 	void SetContactListener(p2ContactListener* contactListener);
 private:
 	p2Vec2 m_Gravity;
+	std::list<p2Body> bodies;
 };
 
 #endif
